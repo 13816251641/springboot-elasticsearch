@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.SearchResultMapper;
@@ -46,12 +47,13 @@ public class BookIndexHighlightSearch {
         String field = "bookName";
         String searchMessage = "learn english in java";
         List<Book> books = highLigthQuery(field, searchMessage);
-        System.out.println(books);
+        System.out.println(books.size());
     }
 
     public List<Book> highLigthQuery(String field, String searchMessage) {
         NativeSearchQuery searchQuery = new NativeSearchQueryBuilder()
                 .withQuery(QueryBuilders.matchQuery(field, searchMessage))
+                .withPageable(PageRequest.of(0,1))
                 .withHighlightFields(new HighlightBuilder.Field(field)).build();
         AggregatedPage<Book> page = elasticsearchTemplate.queryForPage(searchQuery, Book.class, new SearchResultMapper() {
             @Override
