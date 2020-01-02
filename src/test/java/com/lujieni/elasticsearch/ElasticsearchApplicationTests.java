@@ -28,66 +28,7 @@ public class ElasticsearchApplicationTests {
     private BookIndexRepository bookIndexRepository;
 
     @Autowired
-    private UserDao userDao;
-
-
-    @Autowired
-    private UserService userService;
-
-    @Autowired
     private ElasticsearchTemplate et;
-
-
-
-    @Test
-    public void useMatch(){
-        // 构建查询条件
-        NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
-        // 添加基本分词查询
-        queryBuilder.withQuery(QueryBuilders.matchQuery("bookName", "learn english in java"));
-        Page<Book> search = bookIndexRepository.search(queryBuilder.build());
-        search.stream().forEach(e->{
-            System.out.println(e.toString());
-        });
-    }
-
-    @Test
-    public void useMatchPhrase(){
-        // 构建查询条件
-        NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
-        // 添加基本分词查询
-        queryBuilder.withQuery(QueryBuilders.matchPhraseQuery("bookName", "learn english"));
-        Page<Book> search = bookIndexRepository.search(queryBuilder.build());
-        search.stream().forEach(e->{
-            System.out.println(e.toString());
-        });
-    }
-
-    @Test
-    public void useTerm(){
-        // 构建查询条件
-        NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
-        // 添加基本分词查询
-        queryBuilder.withQuery(QueryBuilders.termQuery("bookName", "learn english"));
-        Page<Book> search = bookIndexRepository.search(queryBuilder.build());
-        search.stream().forEach(e->{
-            System.out.println(e.toString());
-        });
-    }
-
-
-    @Test
-    public void findByBookName(){
-        List<Book> result = bookIndexRepository.findByBookName("english learn");
-        result.stream().forEach(e->{
-            System.out.println(e);
-        });
-    }
-
-
-
-
-
 
     /*
        建立索引
@@ -133,36 +74,12 @@ public class ElasticsearchApplicationTests {
         bookIndexRepository.saveAll(books);
     }
 
-
-
     /*
        删除文档
      */
     @Test
     public void  deleteDocumentById(){
         bookIndexRepository.deleteById(1);
-    }
-
-    /*
-       查询所有
-     */
-    @Test
-    public void  findAll(){
-        Iterable<Book> books = bookIndexRepository.findAll();
-        books.forEach(e->{
-            System.out.println(e.toString());
-        });
-    }
-
-    /*
-       根据id查询
-     */
-    @Test
-    public void  findById(){
-        Optional<Book> optional = bookIndexRepository.findById(2);
-        optional.ifPresent(e->{
-            Date publishDate = e.getPublishDate();
-        });
     }
 
 
