@@ -37,7 +37,10 @@ public class ElasticsearchApplicationTests {
     public void createBookIndex() {
         /* 创建索引 */
         et.createIndex(Book.class);
-        /* 配置映射mapping,根据实体类里面字段的Field注解自动完成映射  */
+        /*
+         *  配置映射mapping,根据实体类里面字段的Field注解自动完成映射,
+         * 不添加的话@Field会无效!!!
+         */
         et.putMapping(Book.class);
     }
 
@@ -65,15 +68,15 @@ public class ElasticsearchApplicationTests {
     */
     @Test
     public void multiAddDocument() {
-        List<Book> books = Arrays.asList(new Book().setId(2).setAuthor("Jack Hole")
+        List<Book> books = Arrays.asList(new Book().setId(2).setAuthor("托尔斯泰")
                                             .setPublishDate(new Date())
-                                            .setBookName("Learn English"),
-                                          new Book().setId(3).setAuthor("David Hole")
+                                            .setBookName("战争与和平"),
+                                          new Book().setId(3).setAuthor("雨果")
                                                   .setPublishDate(new Date())
-                                                  .setBookName("Learn C++"),
-                                          new Book().setId(4).setAuthor("Allen Frank")
+                                                  .setBookName("巴黎圣母院"),
+                                          new Book().setId(4).setAuthor("雨果")
                                                   .setPublishDate(new Date())
-                                                  .setBookName("Thinking in C++"));
+                                                  .setBookName("悲惨世界"));
         bookIndexRepository.saveAll(books);
     }
 
