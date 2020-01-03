@@ -1,24 +1,17 @@
 package com.lujieni.elasticsearch;
 
 import com.lujieni.elasticsearch.bean.Book;
-import com.lujieni.elasticsearch.bean.User;
 import com.lujieni.elasticsearch.repository.BookIndexRepository;
-import com.lujieni.elasticsearch.repository.UserDao;
-import com.lujieni.elasticsearch.service.UserService;
-import org.elasticsearch.index.query.QueryBuilders;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
