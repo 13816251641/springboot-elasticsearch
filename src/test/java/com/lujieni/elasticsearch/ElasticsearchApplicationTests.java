@@ -35,7 +35,10 @@ public class ElasticsearchApplicationTests {
      */
     @Test
     public void createBookIndex() {
+        /* 创建索引 */
         et.createIndex(Book.class);
+        /* 配置映射mapping,根据实体类里面字段的Field注解自动完成映射  */
+        et.putMapping(Book.class);
     }
 
     /*
@@ -51,9 +54,9 @@ public class ElasticsearchApplicationTests {
     */
     @Test
     public void addDocument() {
-        Book book = new Book().setId(1).setAuthor("Tom Allen")
+        Book book = new Book().setId(1).setAuthor("路遥")
                                .setPublishDate(new Date())
-                               .setBookName("Thinking in Java");
+                               .setBookName("平凡的世界");
         bookIndexRepository.save(book);
     }
 

@@ -24,7 +24,7 @@ public class Book{
      * 可以在这个字段上进行查询,为false代表你不能在这个字段上进行任何查询
      * 我发现text&keyword默认都会帮你建立索引
      */
-    @Field(type = FieldType.Text,index = true)
+    @Field(type = FieldType.Text,index = true,analyzer = "ik_max_word")
     private String bookName;
     @Field(type = FieldType.Keyword,index = true)
     private String author;
